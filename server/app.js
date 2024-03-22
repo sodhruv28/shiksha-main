@@ -60,7 +60,6 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log("HELLO");
   console.log("front end port", process.env.FRONTEND_URL);
   console.log("admin port ", process.env.ADMIN_URL);
   console.log("client port ", process.env.CLIENT_URL);
