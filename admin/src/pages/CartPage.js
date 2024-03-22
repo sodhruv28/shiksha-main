@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Loader1 from "../components/loaders/Loader1";
 import { toast } from "react-toastify";
-import { loadStripe } from '@stripe/stripe-js';
-
+import { loadStripe } from "@stripe/stripe-js";
 
 const CartPage = () => {
   const { cartItems, setCartItems } = useAuth();
@@ -42,13 +41,11 @@ const CartPage = () => {
         },
         { withCredentials: true }
       );
-  
+
       if (response.data.url) {
         window.location.href = response.data.url;
       } else if (response.data.sessionId) {
-        const stripe = await loadStripe(
-          process.env.STRIPE_PUBLISH_KEY
-        );
+        const stripe = await loadStripe(process.env.STRIPE_PUBLISH_KEY);
         const result = await stripe.redirectToCheckout({
           sessionId: response.data.sessionId,
         });
@@ -59,32 +56,32 @@ const CartPage = () => {
       } else {
         throw new Error("Invalid response from server");
       }
-  
+
       // If payment is successful, redirect to the playlist page
       try {
         // Set loading state to true
         setBtnLoading(true);
-  
+
         // Make a POST request to edit the playlist
         const editPlaylistResponse = await axios.post(
           "http://localhost:8080/api/playlist/edit",
           null,
           { withCredentials: true }
         );
-  
+
         // Check if editing the playlist was successful
         if (editPlaylistResponse.status === 200) {
         }
-  
+
         // Fetch cart items
         const fetchCartItemsResponse = await axios.get(
           "http://localhost:8080/api/cart/fetch-cartItems",
           { withCredentials: true }
         );
-  
+
         // Update cart items state
         setCartItems(fetchCartItemsResponse.data.cartItems);
-  
+
         // Redirect to the playlist page
         navigate("/user"); // Update this to the correct URL of the playlist page
       } catch (error) {
@@ -100,9 +97,6 @@ const CartPage = () => {
       setBtnLoading(false);
     }
   };
-  
-  
-  
 
   const clearCart = async () => {
     try {
@@ -136,19 +130,34 @@ const CartPage = () => {
   if (cartItems.length < 1) {
     return (
       <NotFoundWrapper>
-      <div className="container"><div>
-  <div>
-      <img style={{width:"600px",height:"300px",marginLeft:"400px",marginTop:"70px"}} src="\images\em2.png" alt="" srcset="" />
-      <div style={{fontSize:"30px",textAlign:"center",color:"#c9aaef"}}>
-          YOUR CART IS EMPTY
+        <div className="container">
           <div>
-              ADD SOMTHING TO MAKE ME HAPPY :)
+            <div>
+              <img
+                style={{
+                  width: "600px",
+                  height: "300px",
+                  marginLeft: "400px",
+                  marginTop: "70px",
+                }}
+                src="\images\em2.png"
+                alt=""
+                srcset=""
+              />
+              <div
+                style={{
+                  fontSize: "30px",
+                  textAlign: "center",
+                  color: "#c9aaef",
+                }}
+              >
+                YOUR CART IS EMPTY
+                <div>ADD SOMTHING TO MAKE ME HAPPY :)</div>
+              </div>
+            </div>
           </div>
-      </div>
-  </div>
- 
-  </div></div>
-    </NotFoundWrapper>
+        </div>
+      </NotFoundWrapper>
     );
   }
 
@@ -212,7 +221,6 @@ const CartPage = () => {
     </CartWrapper>
   );
 };
-
 
 const NotFoundWrapper = styled.div`
   padding: 30px 0;
@@ -294,5 +302,3 @@ const CartWrapper = styled.div`
 `;
 
 export default CartPage;
-
-
