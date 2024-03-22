@@ -9,6 +9,7 @@ import Loader1 from "../components/loaders/Loader1";
 import { toast } from "react-toastify";
 import { loadStripe } from '@stripe/stripe-js';
 
+
 const CartPage = () => {
   const { cartItems, setCartItems } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -46,7 +47,7 @@ const CartPage = () => {
         window.location.href = response.data.url;
       } else if (response.data.sessionId) {
         const stripe = await loadStripe(
-          "pk_test_51ObhU4SH9wErgkPnFTgGoUExLMAPLFcXIWICmAmtNTdKJ9wG4lJpirRBXVVz1ScDfsyAEGiEvboLr6CMhIe3kmmq004WupIC1P"
+          process.env.STRIPE_PUBLISH_KEY
         );
         const result = await stripe.redirectToCheckout({
           sessionId: response.data.sessionId,
