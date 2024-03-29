@@ -59,23 +59,16 @@ const AddCategory = () => {
   };
 
   const handleUpdateCategory = (category) => {
-    // Implement logic for updating the category
-    // For example, you can redirect to a different page for updating the category or open a modal
     setCategory(category);
     setCategoryName(category.category_name);
   };
 
   const handleDeleteCategory = async (category) => {
     try {
-      // Extract the categoryId from the category object
-      const categoryId = category._id; // Assuming category object has _id property
-
-      // Set loading state to true
+      const categoryId = category._id;
       setBtnLoading(true);
 
       console.log(category);
-
-      // Send a request to delete the category
       await axios.delete(
         `http://localhost:8080/api/course/delete-category/${categoryId}`,
         {
@@ -83,15 +76,11 @@ const AddCategory = () => {
         }
       );
 
-      // Return true to indicate successful deletion
       return true;
     } catch (error) {
-      // Handle errors, you can customize error handling based on your requirements
       console.error("Error deleting category:", error);
-      // Return false to indicate failure
       return false;
     } finally {
-      // Set loading state to false regardless of success or failure
       setBtnLoading(false);
       fetchCategoryNames();
     }

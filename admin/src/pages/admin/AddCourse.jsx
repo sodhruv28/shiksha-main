@@ -10,6 +10,7 @@ const AddCourse = () => {
     image: null,
     course_name: "",
     description: "",
+    creator: "",
     course_url: "",
     lang: "",
     actual_price: "",
@@ -82,6 +83,7 @@ const handleInputChange = (e) => {
   setCourseData((prevCourseData) => ({
     ...prevCourseData,
     [name]: updatedValue,
+    creator: userInfo._id,
   }));
 };
 
@@ -115,6 +117,8 @@ const handleInputChange = (e) => {
       content: contentItems,
     });
   };
+
+  
 
   // Event handler for form submission
   const handleSubmit = async (e) => {
@@ -221,20 +225,6 @@ const handleInputChange = (e) => {
           </div>
         </div>
         <div className="row">
-          {/* <div className="form-group col-3">
-            <label className="form-label" htmlFor="lang">
-              Language:
-            </label>
-            <input
-              required
-              className="form-control py-2"
-              type="text"
-              id="lang"
-              name="lang"
-              value={courseData.lang}
-              onChange={handleInputChange}
-            />
-          </div> */}
           <div className="col-md-6 mb-4">
             <label className="form-label" htmlFor="lang">
               Language:
@@ -248,7 +238,6 @@ const handleInputChange = (e) => {
               onChange={handleInputChange}
             >
               <option value="">Select language</option>
-              {/* Map over language names to create options */}
               {LanguageNames.map((language, index) => (
                 <option key={index} value={language}>
                   {language}

@@ -6,26 +6,9 @@ import Certificate from "./pdfs/Certificate";
 import axios from "axios";
 
 const PlaylistItem = ({ course, loading, setPlaylist, userInfo }) => {
-  const [instructors,setInstructors] = useState([])
-  const [instructor,setInstructor] = useState('')
 
-  const fetchInstructors = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/api/user/teachers"
-        );
-        setInstructors(response.data.instructors);
-        const inst = response.data.instructors.find(inst=>inst._id ===course.creator)
-        setInstructor(inst)
-      } catch (error) {
-        console.error("Error fetching instructors:", error);
-        // Handle error appropriately
-      }
-  };
-  useEffect(()=>{
-    
-  fetchInstructors();
-  },[])
+
+
   if (loading) {
     return <CartItemLoader></CartItemLoader>;
   }
@@ -38,11 +21,11 @@ const PlaylistItem = ({ course, loading, setPlaylist, userInfo }) => {
       <div className="cart-item-info d-flex flex-column">
         <div className="d-flex flex-column justify-content-center mb-3">
           <span className="fw-7 fs-15">{course.course_name}</span>
-          <span className="fs-13">By {instructor?.username}</span>
+          <span className="fs-13">By {course.creator.username}</span>
         </div>
         <div className="d-flex align-items-center justify-content-between px-5">
           <div className="cart-item-category bg-orange fs-12 text-capitalize text-white fw-7">
-            {course.category}
+            {course.category?.category_name}
           </div>
           <a
             href={`${course.course_url}`}
@@ -66,6 +49,7 @@ const PlaylistItem = ({ course, loading, setPlaylist, userInfo }) => {
               <i className="fas fa-play"></i> &nbsp; Watch
             </div>
           </a>
+          {console.log(course)}
           {course.isCertified && <Certificate course={course} user={userInfo}/>}
         </div>
       </div>

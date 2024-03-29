@@ -6,26 +6,6 @@ import CartItemLoader from "./loaders/CartItemLoader";
 import { toast } from "react-toastify";
 
 const CartItem = ({ cartItem, loading, setLoading, setCartItems }) => {
-  const [instructors,setInstructors] = useState([])
-  const [instructor,setInstructor] = useState('')
-
-  const fetchInstructors = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/api/user/teachers"
-        );
-        setInstructors(response.data.instructors);
-        const inst = response.data.instructors.find(inst=>inst._id ===cartItem.course.creator)
-        setInstructor(inst)
-      } catch (error) {
-        console.error("Error fetching instructors:", error);
-        // Handle error appropriately
-      }
-  };
-  useEffect(()=>{
-    
-  fetchInstructors();
-  },[])
   const removeFromCart = async (cartItem) => {
     try {
       setLoading(true);
@@ -38,7 +18,6 @@ const CartItem = ({ cartItem, loading, setLoading, setCartItems }) => {
         { withCredentials: true }
       );
       setCartItems(response.data.cartItems);
-      setInstructor(response.data.instructor);
       setLoading(false);
       toast.success("Removed from cart");
     } catch (error) {
@@ -61,13 +40,13 @@ const CartItem = ({ cartItem, loading, setLoading, setCartItems }) => {
       <div className="cart-item-info">
         <p className="fw-7 fs-15">{cartItem.course.course_name}</p>
         <span className="cart-item-creator fs-13 opacity-09">
-          By {instructor.username}
+          By {cartItem.course.creator.username}
         </span>
         <div className="fw-7 text-purple">
           ₹{cartItem.course.discounted_price}
         </div>
         <div className="cart-item-category bg-orange fs-12 d-inline-block text-capitalize text-white fw-7">
-          {cartItem.course.category}
+          {cartItem.course.category.category_name}
         </div>
         <br />
         <button

@@ -6,7 +6,6 @@ import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import SingleCoursePage from "./pages/SingleCoursePage";
 import User from "./pages/User";
-import Admin from "./pages/admin";
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
@@ -78,7 +77,6 @@ function App() {
         <Route path="/reg" element={<Reg />} />
         <Route path="/course/:_id" element={<SingleCoursePage />} />
         <Route path="/category/:category" element={<Course />} />
-        <Route path="/pages" element={<Admin />} />
         <Route path="/success" element={<Succes />} />
         <Route path="/cancel" element={<Cancel />} />
         <Route
@@ -142,14 +140,6 @@ function App() {
 
         <Route path="/techsuc" element={<Techsuc />} />
 
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <User />
-            </ProtectedRoute>
-          }
-        />
         <Route
           path="/allcourses"
           element={

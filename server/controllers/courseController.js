@@ -11,13 +11,13 @@ exports.courseCreate = async (req, res) => {
       category,
       course_name,
       description,
+      creator,
       course_url,
       lang,
       actual_price,
       discounted_price,
       what_you_will_learn,
       content,
-      creator,
     } = req.body;
 
     let image = "";
@@ -27,10 +27,10 @@ exports.courseCreate = async (req, res) => {
       return res.status(400).json({ error: 'Price must be a positive number' });
     }
 
-    // Check if discounted price is not greater than actual price
-    if (discounted_price > actual_price) {
-      return res.status(400).json({ error: 'Discounted price cannot be greater than the actual price' });
-    }
+    // // Check if discounted price is not greater than actual price
+    // if (discounted_price >= actual_price) {
+    //   return res.status(400).json({ error: 'Discounted price cannot be greater than the actual price' });
+    // }
 
     // Check if the course name already exists
     const existingCourse = await Course.findOne({ course_name });
@@ -56,17 +56,19 @@ exports.courseCreate = async (req, res) => {
         image: imageUrl,
         course_name,
         description,
+        creator,
         course_url,
         lang,
         actual_price,
         discounted_price,
         what_you_will_learn,
         content,
-        creator,
       });
 
       // Save the new course
       await newCourse.save();
+
+      console.log(req.body, creator)
 
       // Send success response
       res.status(200).json({ message: "Course Created Successfully." });
@@ -83,7 +85,8 @@ exports.courseCreate = async (req, res) => {
 // Fetch All Courses Controller
 exports.fetchAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find().populate({ path: 'creator', select: '-password' }).populate('category');
+    // const courses = await Course.find().populate({ path: 'creator', select: '-password' }).populate('category');
+    const courses = await Course.find().populate('creator').populate('category');
     res.status(200).json(courses);
   } catch (error) {
     console.error(error);
@@ -96,7 +99,7 @@ exports.getCoursesByUserId = async (req, res) => {
     const userId = req.params.userId;
 
     // Find courses where the user ID matches
-    const courses = await Course.find({ creator: userId });
+    const courses = await Course.find({ creator: userId }).populate("category");
     // Send the courses data as response
     res.status(200).json({ courses });
   } catch (error) {
@@ -106,24 +109,24 @@ exports.getCoursesByUserId = async (req, res) => {
 };
 
 // Fetch Courses by user Controller
-exports.fetchAllCoursesByUser = async (req, res) => {
-  try {
-    const username = req.params.username;
-    // Find the user by username
-    const user = await User.findOne({ username: username });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+// exports.fetchAllCoursesByUser = async (req, res) => {
+//   try {
+//     const username = req.params.username;
+//     // Find the user by username
+//     const user = await User.findOne({ username: username });
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
 
-    // Now, find all courses created by this user
-    const courses = await Course.find({ creator: user._id }).populate('creator', 'username'); // This line assumes you want to populate the creator field with the username
+//     // Now, find all courses created by this user
+//     const courses = await Course.find({ creator: user._id }).populate('creator', 'username'); // This line assumes you want to populate the creator field with the username
 
-    res.status(200).json({ courses });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error fetching courses" });
-  }
-};
+//     res.status(200).json({ courses });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Error fetching courses" });
+//   }
+// };
 
 
 
@@ -149,6 +152,16 @@ exports.courseUpdate = async (req, res) => {
 
         // Extract the secure URL from the Cloudinary result
         const imageUrl = cloudinaryResult.secure_url;
+
+            // Check if the prices are valid
+    if (actual_price <= 0 || discounted_price <= 0) {
+      return res.status(400).json({ error: 'Price must be a positive number' });
+    }
+
+    // Check if discounted price is not greater than actual price
+    if (discounted_price >= actual_price) {
+      return res.status(400).json({ error: 'Discounted price cannot be greater than the actual price' });
+    }
 
   try {
     const course = Course.findById(courseId);
@@ -227,20 +240,6 @@ exports.courseDisable = async (req, res) => {
 };
 
 
-// Filter Courses Controller
-exports.filterCourses = async (req, res) => {
-  const { category } = req.params;
-  const decodedCategory = decodeURIComponent(category);
-
-  try {
-    const filteredCourses = await Course.find({ category: decodedCategory });
-    res.status(200).json({ filteredCourses });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error filtering courses" });
-  }
-};
-
 // Fetch Course-Details Controller
 exports.fetchCourseDetails = async (req, res) => {
   const { courseId } = req.params;
@@ -253,10 +252,6 @@ exports.fetchCourseDetails = async (req, res) => {
     res.status(500).json({ success: false, message: "Error fetching course details", error: error.message });
   }
 };
-
-
-
-
 
 exports.createcategory = async (req, res) => {
   const { category_name } = req.body;
@@ -351,76 +346,3 @@ exports.deleteCategory = async (req, res) => {
     res.status(500).json({ error: 'Error deleting category' });
   }
 };
-
-
-
-
-
-
-
-
-
-// exports.courseUpdate = async (req, res) => {
-//   const { courseId } = req.params;
-//   const {
-//     category,
-//     course_name,
-//     description,
-//     rating_count,
-//     rating_star,
-//     course_url,
-//     students,
-//     creator,
-//     updated_date,
-//     lang,
-//     actual_price,
-//     discounted_price,
-//     what_you_will_learn,
-//     content,
-//   } = req.body;
-//   // console.log(req.body);
-
-//           // Upload image to Cloudinary
-//         const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
-
-//         // Extract the secure URL from the Cloudinary result
-//         const imageUrl = cloudinaryResult.secure_url;
-
-//   try {
-//     const course = Course.findById(courseId);
-//     if (course) {
-//       // Check if an image file was uploaded
-//       if (req.file) {
-//         // console.log(req.file);
-//         // If an image was uploaded, update the image field
-//         const image = req.file.filename;
-//         await Course.findByIdAndUpdate(courseId, { image });
-//       }
-//       const updateCourse = await Course.findByIdAndUpdate(
-//         courseId,
-//         {
-//           category,
-//           course_name,
-//           description,
-//           rating_count,
-//           rating_star,
-//           students,
-//           course_url,
-//           creator,
-//           updated_date,
-//           lang,
-//           actual_price,
-//           discounted_price,
-//           what_you_will_learn,
-//           content,
-//         },
-//       );
-//       res.json(updateCourse);
-//     } else {
-//       res.status(401).json({ message: "Course Not Found" });
-//     }
-//   } catch (error) {
-//     // console.log(error);
-//     res.status(500).json({ message: "Error updating course" });
-//   }
-// };
