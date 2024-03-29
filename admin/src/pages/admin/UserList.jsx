@@ -7,7 +7,7 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(5); // Number of users to display per page
+  const [usersPerPage] = useState(10); // Number of users to display per page
   const [searchTerm, setSearchTerm] = useState(""); // Search term state
   const [currentUser, setcurrentUser] = useState({});
   const [currentUserRole, setcurrentUserRole] = useState(""); // State to hold the current user's role
@@ -80,6 +80,10 @@ const UserList = () => {
 
   // Function to handle deleting a user
   const handleDeleteUser = (userId) => {
+    if (currentUserRole !== "admin") {
+      toast.error("Only admin users can change roles.");
+      return;
+    }
     setLoading(true);
     // Send a request to delete the user
     axios
@@ -110,6 +114,47 @@ const UserList = () => {
 
   // Function to handle editing a user's role
   const handleEditUser = (userId, newRole) => {
+    // Check if the user's role is "admin"
+    // if (currentUserRole !== "admin") {
+    //   toast.error("Only admin users can change roles.");
+    //   return;
+    // }
+  
+    setLoading(true);
+    // Send a request to update the user's role
+    axios
+      .put(
+        `http://localhost:8080/api/user/role/${userId}`,
+        { role: newRole },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        // Refetch users after role change
+        axios
+          .get("http://localhost:8080/api/user/fetch-allusers", {
+            withCredentials: true,
+          })
+          .then((response) => {
+            setUsers(response.data.users);
+            toast.success(
+              `${newRole === "admin" ? "user" : "admin"} maked ${newRole}`
+            );
+          })
+          .catch((error) => {
+            console.error("Error fetching users:", error);
+            toast.error("Error Changing Role");
+          });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error updating user role:", error);
+        setLoading(false);
+      });
+  };
+
+  const handleEdit = (userId, newRole) => {
     // Check if the user's role is "admin"
     if (currentUserRole !== "admin") {
       toast.error("Only admin users can change roles.");
@@ -208,14 +253,14 @@ const UserList = () => {
                                         {user.role === "sub-admin" ? (
                                           <button
                                             className="btn btn-primary btn-sm mx-2"
-                                            onClick={() => handleEditUser(user._id, "user")}
+                                            onClick={() => handleEdit(user._id, "user")}
                                           >
                                             Make User 
                                           </button>
                                         ) : (
                                           <button
                                             className="btn btn-primary btn-sm mx-2"
-                                            onClick={() => handleEditUser(user._id, "sub-admin")}
+                                            onClick={() => handleEdit(user._id, "sub-admin")}
                                           >
                                             Make Sub-Admin
                                           </button>

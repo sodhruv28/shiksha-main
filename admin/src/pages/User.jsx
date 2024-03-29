@@ -29,7 +29,7 @@ export default function User() {
   };
 
   const fetchTeacher = async () => {
-    if (userInfo.role === "admin") {
+    if (userInfo.role === "admin" || userInfo.role === "sub-admin") {
       try {
         const response = await axios.get(
           "http://localhost:8080/api/user/teacherdata"
@@ -43,7 +43,7 @@ export default function User() {
   };
 
   const fetchInstructors = async () => {
-    if (userInfo.role === "admin") {
+    if (userInfo.role === "admin"|| userInfo.role === "sub-admin") {
       try {
         const response = await axios.get(
           "http://localhost:8080/api/user/teachers"
@@ -312,7 +312,7 @@ export default function User() {
                   </Card.Body>
                 )}
               </Card>
-              {userInfo.role === "admin" && (
+              {userInfo.role === "admin" || userInfo.role === "sub-admin" && (
                 <Card>
                   <Card.Text>
                     <h2>Instructors</h2>
@@ -340,7 +340,7 @@ export default function User() {
                 </Card>
               )}
 
-              {userInfo.role === "admin" && (
+              {userInfo.role === "admin"  || userInfo.role === "sub-admin" && (
                 <Card>
                   <Card.Body>
                     <Card.Text>

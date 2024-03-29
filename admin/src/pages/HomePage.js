@@ -23,13 +23,10 @@ const HomePage = () => {
         );
         const { authenticated, user } = response.data;
         setAuthenticated(authenticated);
-        // console.log(authenticated);
         setUserInfo(user);
-        // console.log(user);
         setCartItems(user.cart);
         setLoading(false);
       } catch (error) {
-        // console.error("Error checking authentication:", error);
         setAuthenticated(false);
         setLoading(false);
       }
@@ -44,9 +41,6 @@ const HomePage = () => {
   return (
     <div className="holder">
       <Slider></Slider>
-      
-      {/* <Hero /> */}
-      {/* <CategoriesList /> */}
       <CoursesList />
       <Slider1></Slider1>
       {!(userInfo?.role === "instructor" || userInfo?.role === "admin" || userInfo?.role === "sub-admin") && <ChooseUs></ChooseUs>}

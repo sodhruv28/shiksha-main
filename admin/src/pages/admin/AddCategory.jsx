@@ -67,8 +67,6 @@ const AddCategory = () => {
     try {
       const categoryId = category._id;
       setBtnLoading(true);
-
-      console.log(category);
       await axios.delete(
         `http://localhost:8080/api/course/delete-category/${categoryId}`,
         {

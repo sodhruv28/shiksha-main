@@ -19,12 +19,9 @@ function ProtectedRoute({ children }) {
         const { authenticated, user } = response.data;
         localStorage.setItem("authenticated", JSON.stringify(authenticated));
         setAuthenticated(authenticated);
-        // console.log(authenticated);
         setUserInfo(user);
-        // console.log(user);
         setLoading(false);
       } catch (error) {
-        // console.error("Error checking authentication:", error);
         setAuthenticated(false);
         setLoading(false);
       }
@@ -32,8 +29,6 @@ function ProtectedRoute({ children }) {
 
     checkAuthentication();
   }, [setAuthenticated, setUserInfo]);
-  //   console.log(authenticated);
-  //   console.log(userInfo);
   if (loading) {
     return <Loader1></Loader1>;
   }

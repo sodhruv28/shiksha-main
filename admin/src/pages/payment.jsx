@@ -52,26 +52,7 @@ function PlaylistForm() {
 }
 
 const CourseItem = ({ playlist }) => {
-  const [instructors,setInstructors] = useState([])
-  const [instructor,setInstructor] = useState('')
 
-  const fetchInstructors = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/api/user/teachers"
-        );
-        setInstructors(response.data.instructors);
-        const inst = response.data.instructors.find(inst=>inst._id ===playlist.creator)
-        setInstructor(inst)
-      } catch (error) {
-        console.error("Error fetching instructors:", error);
-        // Handle error appropriately
-      }
-  };
-  useEffect(()=>{
-    
-  fetchInstructors();
-  },[])
   return (
     <CartItemWrapper className="d-flex align-items-center justify-content-between">
       <div className="cart-item-img">
@@ -80,11 +61,11 @@ const CourseItem = ({ playlist }) => {
       <div className="cart-item-info d-flex flex-column">
         <div className="d-flex flex-column justify-content-center mb-4">
           <span className="fw-7 fs-15">{playlist.course_name}</span>
-          <span className="fs-13">By {instructor?.username}</span>
+          <span className="fs-13">By {playlist.creator.username}</span>
         </div>
         <div className="d-flex align-items-center justify-content-between px-5">
           <div className="cart-item-category bg-orange fs-12 text-capitalize text-white fw-7">
-            {playlist.category}
+            {playlist.category.category_name}
           </div>
           <div className="d-flex flex-column justify-content-center mb-4">
             <span className="fw-7 fs-15">₹{playlist.discounted_price}</span>

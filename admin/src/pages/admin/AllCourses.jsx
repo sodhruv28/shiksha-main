@@ -20,7 +20,6 @@ const AllCourses = () => {
         { withCredentials: true }
       );
       setCourses(res.data);
-      console.log(res.data);
       setLoading(false);
     } catch (error) {
       setError("Error fetching data. Please try again later.");
@@ -36,7 +35,6 @@ const AllCourses = () => {
         { withCredentials: true }
       );
       setCourses(res.data.courses);
-      console.log(res.data.courses)
       setLoading(false);
     } catch (error) {
       setError("Error fetching data. Please try again later.");

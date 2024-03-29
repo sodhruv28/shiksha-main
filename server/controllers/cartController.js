@@ -40,10 +40,6 @@ exports.addToCart = async (req, res) => {
     });
 
     await newCartItem.save();
-
-    // Add the cart item to the user's cart array in the User model
-    // console.log(req.user._id);
-    // const userId = req.user._id; // Assuming you're using authentication middleware
     const user = await User.findByIdAndUpdate(
       userId,
       { $push: { cart: newCartItem._id } },
@@ -61,28 +57,20 @@ exports.addToCart = async (req, res) => {
 exports.fetchCartItems = async (req, res) => {
   try {
     const requestedUserId = req.user._id;
-
     const user = await User.findById(requestedUserId);
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    // Find all cart items belonging to the user
     const cartItems = await CartItem.find({
       _id: { $in: user.cart },
     }).populate({
       path: 'course',
-    populate: {
-        path: 'category',
-        path: 'creator'
-    }
+      populate: [
+        { path: 'category' },
+        { path: 'creator' }
+      ]
     });
-
-    // Filter out and remove cart items with null course reference
     const updatedCartItems = cartItems.filter((cartItem) => cartItem.course);
-
-    // Update the user's cart to remove cart items with null course reference
     user.cart = updatedCartItems.map((cartItem) => cartItem._id);
     await user.save();
 

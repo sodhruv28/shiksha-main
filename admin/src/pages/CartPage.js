@@ -23,7 +23,6 @@ const CartPage = () => {
           { withCredentials: true }
         );
         setCartItems(response.data.cartItems);
-        console.log(response.data.cartItems);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching cartItems:", error);
@@ -110,11 +109,9 @@ const CartPage = () => {
         { withCredentials: true }
       );
       setCartItems(response.data.cartItems);
-      console.log(response.data)
       setLoading(false);
       toast.success("Cart Cleared");
     } catch (error) {
-      // console.log(error);
       toast.error("Error clearing cart");
       setLoading(false);
     }

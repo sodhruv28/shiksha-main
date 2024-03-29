@@ -67,9 +67,6 @@ exports.courseCreate = async (req, res) => {
 
       // Save the new course
       await newCourse.save();
-
-      console.log(req.body, creator)
-
       // Send success response
       res.status(200).json({ message: "Course Created Successfully." });
     } else {
@@ -85,14 +82,31 @@ exports.courseCreate = async (req, res) => {
 // Fetch All Courses Controller
 exports.fetchAllCourses = async (req, res) => {
   try {
-    // const courses = await Course.find().populate({ path: 'creator', select: '-password' }).populate('category');
-    const courses = await Course.find().populate('creator').populate('category');
+    const courses = await Course.find()
+      .populate({
+        path: 'creator',
+        select: '-password'
+      })
+      .populate({
+        path: 'category',
+      });
     res.status(200).json(courses);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching courses" });
   }
 };
+
+// exports.fetchAllCourses = async (req, res) => {
+//   try {
+//     // const courses = await Course.find().populate({ path: 'creator', select: '-password' }).populate('category');
+//     const courses = await Course.find().populate('creator').populate('category');
+//     res.status(200).json(courses);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Error fetching courses" });
+//   }
+// };
 
 exports.getCoursesByUserId = async (req, res) => {
   try {
@@ -145,8 +159,6 @@ exports.courseUpdate = async (req, res) => {
     what_you_will_learn,
     content,
   } = req.body;
-  // console.log(req.body);
-
         // Upload image to Cloudinary
         const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
 
@@ -166,10 +178,7 @@ exports.courseUpdate = async (req, res) => {
   try {
     const course = Course.findById(courseId);
     if (course) {
-      // Check if an image file was uploaded
       if (req.file) {
-        // console.log(req.file);
-        // If an image was uploaded, update the image field
         const image = req.file.filename;
         await Course.findByIdAndUpdate(courseId, { image:imageUrl });
       }
@@ -194,7 +203,6 @@ exports.courseUpdate = async (req, res) => {
       res.status(401).json({ message: "Course Not Found" });
     }
   } catch (error) {
-    // console.log(error);
     res.status(500).json({ message: "Error updating course" });
   }
 };
