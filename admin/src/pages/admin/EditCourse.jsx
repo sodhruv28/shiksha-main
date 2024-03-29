@@ -77,24 +77,6 @@ const EditCourse = () => {
       });
   }, [_id]);
   
-
-  // useEffect(() => {
-  //   // Fetch the original course data by _id
-  //   setLoading(true);
-  //   axios
-  //     .get(`http://localhost:8080/api/course/fetch-courseDetails/${_id}`)
-  //     .then((response) => {
-  //       setOriginalCourseData(response.data);
-  //       setCourseData(response.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching course details", error);
-  //       setLoading(false);
-  //     });
-  // }, [_id]);
-
-
   // Update isDataChanged whenever courseData changes
   useEffect(() => {
     const hasDataChanged = !compareObjects(courseData, originalCourseData);

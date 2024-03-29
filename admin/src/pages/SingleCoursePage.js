@@ -12,9 +12,7 @@ import SingleCourseLoader from "../components/loaders/SingleCourseLoader";
 import { toast } from "react-toastify";
 
 const SingleCoursePage = () => {
-  
-  const [instructor,setInstructor] = useState('')
-  const { _id } = useParams();
+    const { _id } = useParams();
   const [course, setCourse] = useState({});
   const [loading, setLoading] = useState(true);
   const [btnLoading, setBtnLoading] = useState(false);
