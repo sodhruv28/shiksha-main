@@ -125,25 +125,9 @@ const SingleCoursePage = () => {
               </li>
               <li className="flex">
                 <span>
-                  <MdInfo />
-                </span>
-                <span className="fs-14 course-info-txt fw-5">
-                  Last updated {updated_date}
-                </span>
-              </li>
-              <li className="flex">
-                <span>
                   <TbWorld />
                 </span>
                 <span className="fs-14 course-info-txt fw-5">{lang}</span>
-              </li>
-              <li className="flex">
-                <span>
-                  <RiClosedCaptioningFill />
-                </span>
-                <span className="fs-14 course-info-txt fw-5">
-                  {lang} [Auto]
-                </span>
               </li>
             </ul>
           </div>
