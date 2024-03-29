@@ -122,7 +122,7 @@ const SingleCoursePage = () => {
             <ul className="course-info">
               <li>
                 <span className="fs-14">
-                  Created by <span className="fw-6 opacity-08">{creator.username}</span>
+                  Created by <span className="fw-6 opacity-08">{creator?.username}</span>
                 </span>
               </li>
               <li className="flex">

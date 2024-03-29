@@ -10,8 +10,6 @@ const Tabs = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(10); // Adjust the number of courses per page as needed
 
   const tabHandler = (category) => {
     setActiveTab(category.category_name);
@@ -58,18 +56,10 @@ const Tabs = () => {
     )
   );
 
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentCourses = courses
-    .filter(
-      (course) =>
-        activeTab === "all" || course?.category?.category_name === activeTab
-    )
-    .slice(indexOfFirstUser, indexOfLastUser);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const goToPreviousPage = () => setCurrentPage((prevPage) => prevPage - 1);
-  const goToNextPage = () => setCurrentPage((prevPage) => prevPage + 1);
+  const currentCourses = courses.filter(
+    (course) =>
+      activeTab === "all" || course?.category?.category_name === activeTab
+  );
 
   if (loading) {
     return <Loader1 />;
@@ -111,42 +101,6 @@ const Tabs = () => {
             <Course key={course._id} course={course} />
           ))}
         </div>
-
-        <ul className="pagination">
-          <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-            <button className="page-link" onClick={goToPreviousPage}>
-              Previous
-            </button>
-          </li>
-          {Array.from({ length: Math.ceil(courses.length / usersPerPage) }).map(
-            (_, index) => (
-              <li
-                key={index}
-                className={`page-item ${
-                  currentPage === index + 1 ? "active" : ""
-                }`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => paginate(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            )
-          )}
-          <li
-            className={`page-item ${
-              currentPage === Math.ceil(courses.length / usersPerPage)
-                ? "disabled"
-                : ""
-            }`}
-          >
-            <button className="page-link" onClick={goToNextPage}>
-              Next
-            </button>
-          </li>
-        </ul>
       </div>
     </TabsWrapper>
   );

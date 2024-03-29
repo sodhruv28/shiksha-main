@@ -8,11 +8,9 @@ const {
   fetchAllCourses,
   courseDisable,
   courseUpdate,
-  filterCourses,
   fetchCourseDetails,
   createcategory,
   getCategories,
-  fetchAllCoursesByUser,
   getCoursesByUserId,
   updateCategory,
   deleteCategory,
@@ -44,8 +42,6 @@ router.post(
 // Fetch All courses Route
 router.get("/fetch-allcourses", fetchAllCourses);
 
-// Fetch all courses by a specific user's username
-router.get("/fetch-allcourses-by-username/:username", fetchAllCoursesByUser);
 
 // Update course Route
 router.put(

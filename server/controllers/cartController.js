@@ -71,7 +71,13 @@ exports.fetchCartItems = async (req, res) => {
     // Find all cart items belonging to the user
     const cartItems = await CartItem.find({
       _id: { $in: user.cart },
-    }).populate("course");
+    }).populate({
+      path: 'course',
+    populate: {
+        path: 'category',
+        path: 'creator'
+    }
+    });
 
     // Filter out and remove cart items with null course reference
     const updatedCartItems = cartItems.filter((cartItem) => cartItem.course);
