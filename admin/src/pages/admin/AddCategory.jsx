@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios"; // Make sure to install axios: npm install axios
+import { useAuth } from "../../context/AuthContext";
 
 const AddCategory = () => {
+  const { userInfo } = useAuth();
   const [categoryName, setCategoryName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [btnLoading, setBtnLoading] = useState(false);
@@ -175,6 +177,8 @@ const AddCategory = () => {
                     </button>
                   </td>
                   <td>
+
+                  {userInfo.role === "admin" && (
                     <button
                       className={`btn btn-danger btn-sm ${
                         btnLoading ? "btn-loading" : ""
@@ -183,6 +187,8 @@ const AddCategory = () => {
                     >
                       Delete
                     </button>
+                  )}
+
                   </td>
                 </tr>
               ))}
