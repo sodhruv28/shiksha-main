@@ -49,7 +49,6 @@ const PlaylistItem = ({ course, loading, setPlaylist, userInfo }) => {
               <i className="fas fa-play"></i> &nbsp; Watch
             </div>
           </a>
-          {console.log(course)}
           {course.isCertified && <Certificate course={course} user={userInfo}/>}
         </div>
       </div>

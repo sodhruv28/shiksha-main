@@ -22,11 +22,8 @@ export function AuthProvider({ children }) {
           { withCredentials: true }
         );
         setAuthenticated(result.data.authenticated);
-        // console.log(result.data.authenticated);
         setUserInfo(result.data.user);
-        // console.log(result.data.user);
       } catch (error) {
-        // console.error("Error checking authentication:", error);
         setAuthenticated(false);
         setUserInfo(null);
       }

@@ -100,7 +100,6 @@ exports.userLogout = (req, res) => {
 exports.userUpdate = async (req, res) => {
   const userId = req.user._id;
   const { firstname, lastname, mobilenumber, gender } = req.body;
-  // console.log(req.body);
 
   try {
     const user = User.findById(userId);
@@ -120,14 +119,12 @@ exports.userUpdate = async (req, res) => {
       res.status(401).json({ message: "User Not Found" });
     }
   } catch (error) {
-    // console.log(error);
     res.status(500).json({ message: "Error updating user" });
   }
 };
 
 // Validate Username before register
 exports.validateUsername = async (req, res) => {
-  // console.log(req.params);
   const username = req.params.username;
 
   if (username.length >= 4 && !username.includes(" ")) {
@@ -144,7 +141,6 @@ exports.validateUsername = async (req, res) => {
 
 // Validate Email before register
 exports.validateEmail = async (req, res) => {
-  // console.log(req.params);
   const email = req.params.email;
 
   if (email) {
@@ -174,7 +170,6 @@ exports.changeRole = async (req, res) => {
     const { userId } = req.params;
     const { role } = req.body;
     const user = await User.findById(userId);
-    console.log(userId, user.username);
     if (user) {
       const updateUser = await User.findByIdAndUpdate(
         userId,
@@ -476,10 +471,18 @@ exports.TeacherData = async (req, res) => {
 exports.Payment = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const user = await User.findById(userId).populate('playlist');
+    const user = await User.findById(userId).populate({
+      path: 'playlist',
+      populate: [
+        { path: 'category' },
+        { path: 'creator' }
+      ]
+    });
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+
     res.json(user.playlist);
   } catch (error) {
     console.error(error);

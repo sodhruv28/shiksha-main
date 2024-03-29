@@ -13,7 +13,6 @@ export const useAuthentication = () => {
           { withCredentials: true }
         );
         setUserAuth(result.data.authenticated);
-        console.log(result.data.authenticated);
       } catch (error) {
         console.error("Error checking authentication:", error);
         setUserAuth(false);
