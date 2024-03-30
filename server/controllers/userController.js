@@ -79,6 +79,24 @@ exports.userRegister = async (req, res) => {
       });
       await newUser.save();
 
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD,
+        },
+      });
+      // Define email data
+
+      const mailOptions = {
+        from: process.env.EMAIL,
+        to: email,
+        subject: "Registration Confirmation - SHIKSHA",
+        html: emailTemplate({ username }),
+      };
+      // Send the email
+      await transporter.sendMail(mailOptions);
+
       res.json({ message: "User registered successfully" });
     } else {
       res.json({ message: "Enter same passwords" });
