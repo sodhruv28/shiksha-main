@@ -24,7 +24,7 @@ module.exports = router;
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL, process.env.CLIENT_URL], // Replace with the URL of your client application
+    origin: [process.env.ADMIN_URL], // Replace with the URL of your client application
     credentials: true, // Enable credentials (cookies) support
   })
 );
@@ -60,9 +60,7 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log("front end port", process.env.FRONTEND_URL);
   console.log("admin port ", process.env.ADMIN_URL);
-  console.log("client port ", process.env.CLIENT_URL);
   console.log(`Server is running on port ${PORT}`);
 });
 

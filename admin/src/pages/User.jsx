@@ -19,7 +19,7 @@ export default function User() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [instructor,setInstructor] = useState('')
+  const [instructor, setInstructor] = useState("");
   const [instructors, setInstructors] = useState([]);
   const [teachers, setteachers] = useState([]);
 
@@ -43,7 +43,7 @@ export default function User() {
   };
 
   const fetchInstructors = async () => {
-    if (userInfo.role === "admin"|| userInfo.role === "sub-admin") {
+    if (userInfo.role === "admin" || userInfo.role === "sub-admin") {
       try {
         const response = await axios.get(
           "http://localhost:8080/api/user/teachers"
@@ -195,7 +195,7 @@ export default function User() {
                       </button>
                     </Link>
                   )}
-                   {userInfo.role === "admin" && ( 
+                  {userInfo.role === "admin" && (
                     <Link to="/paymenthistory">
                       <button className="btn btn-outline-primary me-3">
                         payment history
@@ -228,7 +228,8 @@ export default function User() {
             {userInfo.role === "instructor" && (
               <Card>
                 <Container>
-                  <h1>Your Item Lists</h1>                  <ItemListWrapper>
+                  <h1>Your Item Lists</h1>{" "}
+                  <ItemListWrapper>
                     <ItemCard>
                       {loading ? (
                         <div>Loading...</div>
@@ -237,7 +238,12 @@ export default function User() {
                           {courses.map((course) => (
                             <CartItemWrapper className="d-flex align-items-center justify-content-between">
                               <div className="cart-item-img">
-                                <img style={{height:"80px", width:"100px",marginTop:"10px"}}
+                                <img
+                                  style={{
+                                    height: "80px",
+                                    width: "100px",
+                                    marginTop: "10px",
+                                  }}
                                   src={course.image}
                                   alt={course.course_name}
                                 />
@@ -247,7 +253,6 @@ export default function User() {
                                   <span className="fw-7 fs-15">
                                     {course.course_name}
                                   </span>
-                                
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between px-5">
                                   <div className="cart-item-category bg-orange fs-12 text-capitalize text-white fw-7">
@@ -257,8 +262,7 @@ export default function User() {
                                     href={course.course_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                  >
-                                  </a>
+                                  ></a>
                                 </div>
                               </div>
                             </CartItemWrapper>
@@ -312,7 +316,7 @@ export default function User() {
                   </Card.Body>
                 )}
               </Card>
-              {userInfo.role === "admin" || userInfo.role === "sub-admin" && (
+              {(userInfo.role === "admin" || userInfo.role === "sub-admin") && (
                 <Card>
                   <Card.Text>
                     <h2>Instructors</h2>
@@ -340,7 +344,7 @@ export default function User() {
                 </Card>
               )}
 
-              {userInfo.role === "admin"  || userInfo.role === "sub-admin" && (
+              {(userInfo.role === "admin" || userInfo.role === "sub-admin") && (
                 <Card>
                   <Card.Body>
                     <Card.Text>
