@@ -344,7 +344,8 @@ export default function User() {
                 </Card>
               )}
 
-              {(userInfo.role === "admin" || userInfo.role === "sub-admin") && (
+              {(userInfo.role === "admin" ||
+              userInfo.role === "sub-admin") && (
                 <Card>
                   <Card.Body>
                     <Card.Text>
