@@ -71,7 +71,7 @@ const Certificate = ({ course, user }) => {
                 {/* <Text style={styles.text}>{course._id}</Text> */}
                 <Text style={styles.text}>{user.username}</Text>
                 <li>
-                <Text style={styles.text}>{course.category}</Text>
+                <Text style={styles.text}>{course?.category.category_name}</Text>
                 </li>
                 
               </View>
