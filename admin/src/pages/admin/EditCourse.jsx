@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
 
 const EditCourse = () => {
+  const { userInfo } = useAuth();
   const { _id } = useParams();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -64,10 +66,10 @@ const EditCourse = () => {
       .then((response) => {
         const fetchedCourseData = response.data;
         setOriginalCourseData(fetchedCourseData);
-        setCourseData(prevState => ({
+        setCourseData((prevState) => ({
           ...prevState,
           ...fetchedCourseData,
-          category: fetchedCourseData.category
+          category: fetchedCourseData.category,
         }));
         setLoading(false);
       })
@@ -76,7 +78,7 @@ const EditCourse = () => {
         setLoading(false);
       });
   }, [_id]);
-  
+
   // Update isDataChanged whenever courseData changes
   useEffect(() => {
     const hasDataChanged = !compareObjects(courseData, originalCourseData);
@@ -96,29 +98,32 @@ const EditCourse = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let updatedValue = value;
-  
+
     // Price validation: ensure values are positive numbers
-    if (name === 'actual_price' || name === 'discounted_price') {
+    if (name === "actual_price" || name === "discounted_price") {
       if (parseFloat(value) < 0 || isNaN(parseFloat(value))) {
         setErrorMessage("Price must be a positive number");
         return; // Prevent the state update if the input is invalid
       }
     }
-  
+
     // Specific validation for discounted_price to not exceed actual_price
-    if (name === 'discounted_price' && parseFloat(value) > parseFloat(courseData.actual_price)) {
+    if (
+      name === "discounted_price" &&
+      parseFloat(value) > parseFloat(courseData.actual_price)
+    ) {
       setErrorMessage("Discounted price cannot exceed actual price.");
       return; // Prevent the state update
     } else {
       setErrorMessage(""); // Clear any existing error messages if the input is now valid
     }
-  
     // Update state with the new value for the field
     setCourseData((prevCourseData) => ({
       ...prevCourseData,
       [name]: updatedValue,
+      creator: userInfo._id,
     }));
-  };  
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -150,10 +155,10 @@ const EditCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Create a FormData object to compile the submission data
     const formData = new FormData();
-    
+
     // Append all courseData fields to formData
     Object.keys(courseData).forEach((key) => {
       if (key === "what_you_will_learn" || key === "content") {
@@ -163,19 +168,23 @@ const EditCourse = () => {
         formData.append(key, courseData[key]);
       }
     });
-  
+
     // You don't need to manually set the Content-Type for multipart/form-data;
     // the browser will set it correctly, including the boundary parameter.
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
       withCredentials: true,
     };
-  
+
     try {
       setLoading(true);
-      await axios.put(`http://localhost:8080/api/course/update-course/${_id}`, formData, config);
+      await axios.put(
+        `http://localhost:8080/api/course/update-course/${_id}`,
+        formData,
+        config
+      );
       toast.success("Course updated successfully");
       navigate("/allcourses");
     } catch (error) {
@@ -185,7 +194,6 @@ const EditCourse = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="px-5 mt-5">
@@ -201,13 +209,12 @@ const EditCourse = () => {
               className="form-control py-2"
               id="category"
               name="category"
-              value={courseData.category}
+              value={courseData?.category}
               onChange={handleInputChange}
             >
               <option value="">Select Category</option>
-              {/* Map over category names to create options */}
               {categoryNames.map((category, index) => (
-                <option key={index} value={category._id}>
+                <option key={index} value={category}>
                   {category.category_name}
                 </option>
               ))}

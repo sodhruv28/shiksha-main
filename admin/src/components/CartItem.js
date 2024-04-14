@@ -40,13 +40,13 @@ const CartItem = ({ cartItem, loading, setLoading, setCartItems }) => {
       <div className="cart-item-info">
         <p className="fw-7 fs-15">{cartItem.course.course_name}</p>
         <span className="cart-item-creator fs-13 opacity-09">
-          By {cartItem.course.creator.username}
+          By {cartItem.course.creator?.username}
         </span>
         <div className="fw-7 text-purple">
           ₹{cartItem.course.discounted_price}
         </div>
         <div className="cart-item-category bg-orange fs-12 d-inline-block text-capitalize text-white fw-7">
-          {cartItem.course.category.category_name}
+          {cartItem.course.category?.category_name}
         </div>
         <br />
         <button

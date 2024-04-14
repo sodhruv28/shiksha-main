@@ -45,7 +45,7 @@ const AdminCourse = ({ course, setCourses }) => {
       </div>
       <div className="item-body">
         <h5 className="item-name">{course_name}</h5>
-        <span className="item-creator">{creator.username}</span>
+        <span className="item-creator">{creator?.username}</span>
         <div className="item-price">
           <span className="item-price-new">₹{discounted_price}</span>
           <span className="item-price-old">₹{actual_price}</span>

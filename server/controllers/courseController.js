@@ -1,7 +1,7 @@
 const Course = require("../models/courseSchema");
 const User = require("../models/userSchema");
 const Category = require("../models/categorySchema");
-const cloudinary = require('../utils/cloudinary');
+const cloudinary = require("../utils/cloudinary");
 
 // Create Course Controller
 exports.courseCreate = async (req, res) => {
@@ -24,7 +24,7 @@ exports.courseCreate = async (req, res) => {
 
     // Check if the prices are valid
     if (actual_price <= 0 || discounted_price <= 0) {
-      return res.status(400).json({ error: 'Price must be a positive number' });
+      return res.status(400).json({ error: "Price must be a positive number" });
     }
 
     // // Check if discounted price is not greater than actual price
@@ -37,7 +37,7 @@ exports.courseCreate = async (req, res) => {
 
     if (existingCourse) {
       // If the course name already exists, return an error
-      return res.status(400).json({ error: 'Course name must be unique' });
+      return res.status(400).json({ error: "Course name must be unique" });
     }
 
     if (req.file) {
@@ -78,17 +78,16 @@ exports.courseCreate = async (req, res) => {
   }
 };
 
-
 // Fetch All Courses Controller
 exports.fetchAllCourses = async (req, res) => {
   try {
     const courses = await Course.find()
       .populate({
-        path: 'creator',
-        select: '-password'
+        path: "creator",
+        select: "-password",
       })
       .populate({
-        path: 'category',
+        path: "category",
       });
     res.status(200).json(courses);
   } catch (error) {
@@ -96,17 +95,6 @@ exports.fetchAllCourses = async (req, res) => {
     res.status(500).json({ message: "Error fetching courses" });
   }
 };
-
-// exports.fetchAllCourses = async (req, res) => {
-//   try {
-//     // const courses = await Course.find().populate({ path: 'creator', select: '-password' }).populate('category');
-//     const courses = await Course.find().populate('creator').populate('category');
-//     res.status(200).json(courses);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Error fetching courses" });
-//   }
-// };
 
 exports.getCoursesByUserId = async (req, res) => {
   try {
@@ -118,31 +106,9 @@ exports.getCoursesByUserId = async (req, res) => {
     res.status(200).json({ courses });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-// Fetch Courses by user Controller
-// exports.fetchAllCoursesByUser = async (req, res) => {
-//   try {
-//     const username = req.params.username;
-//     // Find the user by username
-//     const user = await User.findOne({ username: username });
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     // Now, find all courses created by this user
-//     const courses = await Course.find({ creator: user._id }).populate('creator', 'username'); // This line assumes you want to populate the creator field with the username
-
-//     res.status(200).json({ courses });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Error fetching courses" });
-//   }
-// };
-
-
 
 // Update Course Controller
 exports.courseUpdate = async (req, res) => {
@@ -158,29 +124,48 @@ exports.courseUpdate = async (req, res) => {
     discounted_price,
     what_you_will_learn,
     content,
+  
   } = req.body;
-        // Upload image to Cloudinary
-        const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
 
-        // Extract the secure URL from the Cloudinary result
-        const imageUrl = cloudinaryResult.secure_url;
+  let image = "";
 
-            // Check if the prices are valid
-    if (actual_price <= 0 || discounted_price <= 0) {
-      return res.status(400).json({ error: 'Price must be a positive number' });
+     // Check if the prices are valid
+     if (actual_price <= 0 || discounted_price <= 0) {
+      return res.status(400).json({ error: "Price must be a positive number" });
     }
 
-    // Check if discounted price is not greater than actual price
-    if (discounted_price >= actual_price) {
-      return res.status(400).json({ error: 'Discounted price cannot be greater than the actual price' });
-    }
+      // Check if the prices are valid
+  // if (actual_price <= 0 || discounted_price <= 0) {
+  //   return res.status(400).json({ error: 'Price must be a positive number' });
+  // }
+
+  // // Check if discounted price is not greater than actual price
+  // if (discounted_price >= actual_price) {
+  //   return res.status(400).json({ error: 'Discounted price cannot be greater than the actual price' });
+  // }
+
+      // Check if the course name already exists
+      const existingCourse = await Course.findOne({ course_name });
+
+      if (existingCourse) {
+        // If the course name already exists, return an error
+        return res.status(400).json({ error: "Course name must be unique" });
+      }
+
+  // Upload image to Cloudinary
+  const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
+
+  // Extract the secure URL from the Cloudinary result
+  const imageUrl = cloudinaryResult.secure_url;
+
+
 
   try {
     const course = Course.findById(courseId);
     if (course) {
       if (req.file) {
         const image = req.file.filename;
-        await Course.findByIdAndUpdate(courseId, { image:imageUrl });
+        await Course.findByIdAndUpdate(courseId, { image: imageUrl });
       }
       const updateCourse = await Course.findByIdAndUpdate(
         courseId,
@@ -189,6 +174,7 @@ exports.courseUpdate = async (req, res) => {
           course_name,
           description,
           course_url,
+          image: imageUrl,
           creator,
           lang,
           actual_price,
@@ -247,17 +233,24 @@ exports.courseDisable = async (req, res) => {
   }
 };
 
-
 // Fetch Course-Details Controller
 exports.fetchCourseDetails = async (req, res) => {
   const { courseId } = req.params;
 
   try {
-    const courseDetails = await Course.findById(courseId).populate("creator").populate("category");
+    const courseDetails = await Course.findById(courseId)
+      .populate("creator")
+      .populate("category");
     res.status(200).json(courseDetails);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Error fetching course details", error: error.message });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error fetching course details",
+        error: error.message,
+      });
   }
 };
 
@@ -270,16 +263,21 @@ exports.createcategory = async (req, res) => {
 
     if (existingCategory) {
       // If the category name already exists, return an error
-      return res.status(400).json({ error: 'Category name must be unique' });
+      return res.status(400).json({ error: "Category name must be unique" });
     }
 
     // If the category name is unique, create a new category
     const newCategory = new Category({ category_name });
     await newCategory.save();
-    res.status(201).json({ message: 'Category inserted successfully', categoryId: newCategory._id });
+    res
+      .status(201)
+      .json({
+        message: "Category inserted successfully",
+        categoryId: newCategory._id,
+      });
   } catch (error) {
-    console.error('Error creating category:', error);
-    res.status(500).json({ error: 'Error handling category' });
+    console.error("Error creating category:", error);
+    res.status(500).json({ error: "Error handling category" });
   }
 };
 
@@ -293,8 +291,8 @@ exports.getCategories = async (req, res) => {
 
     res.status(200).json({ categories });
   } catch (error) {
-    console.error('Error fetching categories:', error);
-    res.status(500).json({ error: 'Error fetching categories' });
+    console.error("Error fetching categories:", error);
+    res.status(500).json({ error: "Error fetching categories" });
   }
 };
 
@@ -308,7 +306,7 @@ exports.updateCategory = async (req, res) => {
 
     if (existingCategory && existingCategory._id.toString() !== categoryId) {
       // If the category name already exists and does not match the current category, return an error
-      return res.status(400).json({ error: 'Category name must be unique' });
+      return res.status(400).json({ error: "Category name must be unique" });
     }
 
     // Check if the category exists
@@ -316,41 +314,40 @@ exports.updateCategory = async (req, res) => {
 
     if (!existingCategory) {
       // If the category doesn't exist, return an error
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: "Category not found" });
     }
 
     // Update the category name
     existingCategory.category_name = category_name;
     await existingCategory.save();
 
-    res.status(200).json({ message: 'Category updated successfully' });
+    res.status(200).json({ message: "Category updated successfully" });
   } catch (error) {
-    console.error('Error updating category:', error);
-    res.status(500).json({ error: 'Error updating category' });
+    console.error("Error updating category:", error);
+    res.status(500).json({ error: "Error updating category" });
   }
 };
-
 
 exports.deleteCategory = async (req, res) => {
   const categoryId = req.params.categoryId;
 
   try {
-    console.log('Deleting category with ID:', categoryId);
+    console.log("Deleting category with ID:", categoryId);
 
     // Check if the category exists
     const existingCategory = await Category.findById(categoryId);
 
     if (!existingCategory) {
-      console.log('Category not found');
-      return res.status(404).json({ error: 'Category not found' });
+      console.log("Category not found");
+      return res.status(404).json({ error: "Category not found" });
     }
 
     // If the category exists, delete it
     await Category.deleteOne({ _id: categoryId });
 
-    res.status(200).json({ message: 'Category deleted successfully' });
+    res.status(200).json({ message: "Category deleted successfully" });
   } catch (error) {
-    console.error('Error deleting category:', error);
-    res.status(500).json({ error: 'Error deleting category' });
+    console.error("Error deleting category:", error);
+    res.status(500).json({ error: "Error deleting category" });
   }
 };

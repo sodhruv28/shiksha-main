@@ -256,7 +256,7 @@ export default function User() {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between px-5">
                                   <div className="cart-item-category bg-orange fs-12 text-capitalize text-white fw-7">
-                                    {course.category.category_name}
+                                    {course.category?.category_name}
                                   </div>
                                   <a
                                     href={course.course_url}
