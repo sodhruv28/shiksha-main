@@ -1,0 +1,63 @@
+.userpn {
+  align-content: center;
+}
+
+.rounded {
+  border-radius: 50% !important;
+  border-top-left-radius: 50% !important;
+  border-top-right-radius: 50% !important;
+  border-bottom-right-radius: 50% !important;
+  border-bottom-left-radius: 50% !important;
+}
+
+.instructor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.instructor-table th, .instructor-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.instructor-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.instructor-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.instructor-table tr:hover {
+  background-color: #ddd;
+}
+
+.teacher-table-container {
+  overflow-x: auto;
+}
+
+.teacher-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.teacher-table th, .teacher-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.teacher-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.teacher-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.teacher-table tr:hover {
+  background-color: #ddd;
+}
