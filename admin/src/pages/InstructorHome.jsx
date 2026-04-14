@@ -217,7 +217,6 @@ export const InstructorHome = () => {
                 <Card.Text
                   style={{
                     fontSize: "20px",
-                    textAlign: "matchparenet",
                     textAlign: "center",
                   }}
                 >

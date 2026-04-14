@@ -4,7 +4,7 @@ export const Emptycart = () => {
   return (
     <div>
     <div>
-        <img style={{width:"500px",height:"300px",marginLeft:"500px",marginTop:"70px"}} src="\images\em2.png" alt="" srcset="" />
+        <img style={{width:"500px",height:"300px",marginLeft:"500px",marginTop:"70px"}} src="/images/em2.png" alt="" srcset="" />
         <div style={{fontSize:"30px",textAlign:"center"}}>
             YOUR CART IS EMPTY
             <div>

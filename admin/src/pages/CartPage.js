@@ -133,7 +133,7 @@ const CartPage = () => {
                   marginLeft: "400px",
                   marginTop: "70px",
                 }}
-                src="\images\em2.png"
+                src="/images/em2.png"
                 alt=""
                 srcset=""
               />

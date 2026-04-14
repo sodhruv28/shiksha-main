@@ -9,7 +9,7 @@ function AutoLayoutExample() {
     <Card style={{ width:"90%", marginLeft:"80px"}}>
       <Row>
         <Col>
-        <img src="\images\p1.jpg" alt="" srcset="" />
+        <img src="/images/p1.jpg" alt="" srcset="" />
         </Col>
 
         <Col>

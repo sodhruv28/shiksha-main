@@ -307,7 +307,7 @@ export default function User() {
                             width: "400px",
                             marginLeft: "25%",
                           }}
-                          src="\images\22378357_6592321.jpg"
+                          src="/images/22378357_6592321.jpg"
                           alt=""
                           srcset=""
                         />

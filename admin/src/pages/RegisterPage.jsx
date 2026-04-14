@@ -104,7 +104,7 @@ const RegisterPage = () => {
                       width: "95%",
                       marginLeft: "10px",
                     }}
-                    src="\images\Mobile login-pana.png"
+                    src="/images/Mobile login-pana.png"
                   />
                 </div>
                 <div class="col-xl-6" style={{ backgroundColor: "#fff" }}>

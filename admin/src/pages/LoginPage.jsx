@@ -63,7 +63,7 @@ const LoginPage = () => {
                   <img
                     className="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem"
                     style={{ marginTop: "10px", marginLeft: "10px" }}
-                    src="\images\undraw_mobile_content_xvgr.png"
+                    src="/images/undraw_mobile_content_xvgr.png"
                   />
                 </div>
                 <div class="col-xl-6" style={{ backgroundColor: "#fff" }}>

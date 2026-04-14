@@ -32,7 +32,7 @@ const success = () => {
         </svg>
       </div>
 
-        {/* <img  style={{width:"200px",height:"200px",marginTop:"100px",marginLeft:"610px"}}src="\images\p1.png" alt="" srcset="" /> */}
+        {/* <img  style={{width:"200px",height:"200px",marginTop:"100px",marginLeft:"610px"}}src="/images/p1.png" alt="" srcset="" /> */}
     </div>
     <div>
       <div style={{marginTop:"4px"}}>

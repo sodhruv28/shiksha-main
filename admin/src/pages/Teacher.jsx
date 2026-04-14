@@ -4,7 +4,7 @@ import { TbBorderRadius } from 'react-icons/tb'
 
 export const Teacher = () => {
   return (
-    <div><img style={{height : "100px", width : "100px", marginRight :"1200px", float :"left"}} src="\images\1696169183924web_dev_1.jpg" alt="" srcset="" />
+    <div><img style={{height : "100px", width : "100px", marginRight :"1200px", float :"left"}} src="/images/1696169183924web_dev_1.jpg" alt="" srcset="" />
     <div  className='h1'  ></div>
     Dr megha rana 
     

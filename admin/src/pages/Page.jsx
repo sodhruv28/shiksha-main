@@ -119,7 +119,7 @@ const LoginPage = ({isAdmin}) => {
 
 // const load = styled.div `
 // body{
-//   background-image: url("e:\images\img-4.jpg");
+//   background-image: url("e:/images/img-4.jpg");
 //   background-position: center;
 //   background-size: cover;
 //   background-repeat: no-repeat;
