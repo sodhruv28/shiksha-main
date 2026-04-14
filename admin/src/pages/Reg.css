@@ -1,16 +1,24 @@
 .centainer {
-  width: 307px;
-  height: 50px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
 }
 
 .centent {
   display: block;
-  position: sticky;
+  position: relative;
   overflow: hidden;
   font-family: 'Lato', sans-serif;
-  font-size: 35px;
-  line-height: 40px;
+  font-size: 24px;
+  line-height: 32px;
   color: #000000;
+}
+
+@media screen and (min-width: 768px) {
+  .centent {
+    font-size: 35px;
+    line-height: 48px;
+  }
 }
 
 .centent__centainer {

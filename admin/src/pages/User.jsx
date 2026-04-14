@@ -150,7 +150,7 @@ export default function User() {
                 <Card.Img
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                   alt="avatar"
-                  className="rounded"
+                  className="rounded mx-auto d-block"
                   style={{ width: "100px", height: "100px" }}
                   fluid
                 />
@@ -298,18 +298,16 @@ export default function User() {
                         ))}
                       </ul>
                     ) : (
-                      <p>
-                        {" "}
-                        Your PLaylist Is Empty
+                      <p className="d-flex flex-column align-items-center mt-4">
+                        <span className="mb-3">Your Playlist Is Empty</span>
                         <img
                           style={{
-                            height: "400px",
-                            width: "400px",
-                            marginLeft: "25%",
+                            maxWidth: "400px",
+                            width: "100%",
+                            height: "auto",
                           }}
                           src="/images/22378357_6592321.jpg"
-                          alt=""
-                          srcset=""
+                          alt="Empty Playlist"
                         />
                       </p>
                     )}
@@ -320,7 +318,8 @@ export default function User() {
                 <Card>
                   <Card.Text>
                     <h2>Instructors</h2>
-                    <table className="instructor-table">
+                    <div className="instructor-table-container">
+                      <table className="instructor-table">
                       <thead>
                         <tr>
                           <th>Instructor Name</th>
@@ -340,6 +339,7 @@ export default function User() {
                         ))}
                       </tbody>
                     </table>
+                  </div>
                   </Card.Text>
                 </Card>
               )}

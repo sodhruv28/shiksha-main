@@ -214,9 +214,15 @@ const SingleCourseWrapper = styled.div`
     }
 
     .course-head {
-      font-size: 38px;
+      font-size: 28px;
       line-height: 1.2;
       padding: 12px 0 0 0;
+    }
+
+    @media screen and (min-width: 768px) {
+      .course-head {
+        font-size: 38px;
+      }
     }
     .course-para {
       padding: 12px 0;

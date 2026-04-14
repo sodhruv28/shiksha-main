@@ -124,29 +124,27 @@ const CartPage = () => {
     return (
       <NotFoundWrapper>
         <div className="container">
-          <div>
-            <div>
-              <img
-                style={{
-                  width: "600px",
-                  height: "300px",
-                  marginLeft: "400px",
-                  marginTop: "70px",
-                }}
-                src="/images/em2.png"
-                alt=""
-                srcset=""
-              />
-              <div
-                style={{
-                  fontSize: "30px",
-                  textAlign: "center",
-                  color: "#c9aaef",
-                }}
-              >
-                YOUR CART IS EMPTY
-                <div>ADD SOMTHING TO MAKE ME HAPPY :)</div>
-              </div>
+          <div className="empty-cart-content text-center py-5">
+            <img
+              style={{
+                maxWidth: "600px",
+                width: "100%",
+                height: "auto",
+                margin: "0 auto",
+                display: "block"
+              }}
+              src="/images/em2.png"
+              alt="Empty Cart"
+            />
+            <div
+              style={{
+                fontSize: "24px",
+                color: "#c9aaef",
+                marginTop: "20px"
+              }}
+            >
+              YOUR CART IS EMPTY
+              <div>ADD SOMETHING TO MAKE ME HAPPY :)</div>
             </div>
           </div>
         </div>
@@ -157,8 +155,8 @@ const CartPage = () => {
   return (
     <CartWrapper>
       <div className="container">
-        <div className="cart-pg-title">
-          <h3>Shopping Cart</h3>
+        <div className="cart-pg-title mb-4">
+          <h3 className="fs-24 fw-7">Shopping Cart</h3>
         </div>
         <div className="cart-grid grid">
           {/* card grid left */}

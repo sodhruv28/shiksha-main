@@ -141,89 +141,89 @@ const RegisterPage = () => {
                       )}
 
                       <form onSubmit={handleSubmit}>
-                        <div class="row" style={{ marginTop: "50px" }}>
-                          <div class="col-md-6 mb-4">
-                            <div className="form-group mb-3">
-                              <label htmlFor="username" className="form-label">
-                                <h2> Username:</h2>
+                        <div class="row justify-content-center">
+                          <div class="col-12 col-md-10 col-lg-8 mb-4">
+                            <div className="form-group mb-3 text-start">
+                              <label htmlFor="username" className="form-label fw-bold fs-18">
+                                Username:
                               </label>
                               <input
                                 type="text"
                                 id="username"
-                                className="form-control"
+                                className="form-control fs-16"
+                                placeholder="Choose a username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                               />
                             </div>
-                            <div class="col-md-12 mb-4">
-                              <div className="form-group mb-3">
-                                <label htmlFor="email" className="form-label">
-                                  <h2> Email: </h2>
-                                </label>
-                                <input
-                                  type="email"
-                                  id="email"
-                                  className="form-control"
-                                  value={email}
-                                  onChange={(e) => setEmail(e.target.value)}
-                                  required
-                                />
-                              </div>
+                            <div className="form-group mb-3 text-start">
+                              <label htmlFor="email" className="form-label fw-bold fs-18">
+                                Email:
+                              </label>
+                              <input
+                                type="email"
+                                id="email"
+                                className="form-control fs-16"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                              />
                             </div>
-                            <div class="col-md-18 mb-4">
-                              <div className="form-group mb-3">
-                                <label
-                                  htmlFor="password"
-                                  className="form-label"
-                                >
-                                  <h2> Password:</h2>
-                                </label>
-                                <input
-                                  type="password"
-                                  id="password"
-                                  className="form-control"
-                                  value={password}
-                                  onChange={(e) => setPassword(e.target.value)}
-                                  required
-                                />
-                              </div>
-                              <div class="col-md-24 mb-4">
-                                <div className="form-group mb-3">
-                                  <label
-                                    htmlFor="confirmPassword"
-                                    className="form-label"
-                                  >
-                                    <h2> Confirm Password:</h2>
-                                  </label>
-                                  <input
-                                    type="password"
-                                    id="confirmPassword"
-                                    className="form-control"
-                                    value={confirmPassword}
-                                    onChange={(e) =>
-                                      setConfirmPassword(e.target.value)
-                                    }
-                                    required
-                                  />
-                                </div>
-                              </div>
+                            <div className="form-group mb-3 text-start">
+                              <label
+                                htmlFor="password"
+                                className="form-label fw-bold fs-18"
+                              >
+                                Password:
+                              </label>
+                              <input
+                                type="password"
+                                id="password"
+                                className="form-control fs-16"
+                                placeholder="Create a password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                              />
                             </div>
-                            <div>
-                              <h5>
-                                Already a member? <Link to="/login">Login</Link>
+                            <div className="form-group mb-4 text-start">
+                              <label
+                                htmlFor="confirmPassword"
+                                className="form-label fw-bold fs-18"
+                              >
+                                Confirm Password:
+                              </label>
+                              <input
+                                type="password"
+                                id="confirmPassword"
+                                className="form-control fs-16"
+                                placeholder="Confirm your password"
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                  setConfirmPassword(e.target.value)
+                                }
+                                required
+                              />
+                            </div>
+                            
+                            <div className="text-center text-md-start">
+                              <h5 className="fs-14">
+                                Already a member? <Link to="/login" className="text-primary fw-bold">Login</Link>
                               </h5>
-                              <div>
+                              <div className="mt-4">
                                 <button
                                   style={{
-                                    height: "40px",
-                                    width: "120px",
-                                    fontSize: "12px",
+                                    height: "45px",
+                                    width: "100%",
+                                    maxWidth: "180px",
+                                    fontSize: "14px",
                                   }}
                                   type="submit"
-                                  className="btn btn-primary mt-2 px-5"
+                                  className="btn btn-primary fw-bold"
                                 >
-                                  Register
+                                  Register Now
                                 </button>
                               </div>
                             </div>

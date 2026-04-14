@@ -157,10 +157,11 @@ const CourseCard = styled.div`
   }
 
   .item-btns {
-    justify-self: flex-start;
-    padding: 4px 8px 30px 18px;
+    width: 100%;
+    padding: 10px 15px 20px 15px;
     margin-top: auto;
-    .item-btn {
+    flex-wrap: wrap;
+    gap: 10px;
       font-size: 15px;
       display: inline-block;
       padding: 6px 16px;

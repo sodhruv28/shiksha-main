@@ -21,7 +21,9 @@ const Hero = () => {
 
 const HeroWrapper = styled.div`
   background: url(${bg}) center/cover no-repeat;
-  (${hero2})height: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
 
   .container {
     .hero-content {
@@ -30,6 +32,7 @@ const HeroWrapper = styled.div`
       width: 100%;
       margin-left: 0;
       padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
       h1 {
         font-size: 32px;
@@ -38,6 +41,36 @@ const HeroWrapper = styled.div`
       }
       p {
         font-size: 15px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 250px;
+    .container {
+      .hero-content {
+        max-width: 100%;
+        text-align: center;
+        padding: 15px;
+        h1 {
+          font-size: 24px;
+          white-space: normal;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 200px;
+    .container {
+      .hero-content {
+        h1 {
+          font-size: 20px;
+        }
       }
     }
   }

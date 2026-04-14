@@ -65,29 +65,59 @@ const CartItem = ({ cartItem, loading, setLoading, setCartItems }) => {
 };
 
 const CartItemWrapper = styled.div`
-  grid-template-columns: 110px auto;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
 
   .cart-item-img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 80px;
+    flex-shrink: 0;
     overflow: hidden;
+    border-radius: 4px;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-  .cart-item-category {
-    padding: 0px 10px;
-    border-radius: 6px;
+
+  .cart-item-info {
+    flex-grow: 1;
   }
+
+  .cart-item-category {
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+
   .remove-btn {
-    margin-top: 16px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    color: var(--clr-red, #dc3545);
+    padding: 0;
+    cursor: pointer;
     transition: var(--transition);
     &:hover {
-      color: var(--clr-purple);
+      opacity: 0.8;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    .cart-item-img {
+      width: 100%;
+      height: 150px;
     }
   }
 `;

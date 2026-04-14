@@ -126,11 +126,13 @@ const TabsWrapper = styled.div`
 
     .tabs-body {
       margin-top: 32px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr;
     }
 
     @media screen and (min-width: 600px) {
       .tabs-body {
-        display: grid;
         gap: 26px;
         grid-template-columns: repeat(2, 1fr);
       }

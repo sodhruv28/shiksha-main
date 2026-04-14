@@ -85,58 +85,58 @@ const LoginPage = () => {
                       )}
 
                       <form onSubmit={handleSubmit}>
-                        <div class="row">
-                          <div class="col-md-6 mb-4">
-                            <div className="form-group mb-3">
-                              <label htmlFor="username" className="form-label">
-                                <h1> Username:</h1>
+                        <div class="row justify-content-center">
+                          <div class="col-12 col-md-10 col-lg-8 mb-4">
+                            <div className="form-group mb-3 text-start">
+                              <label htmlFor="username" className="form-label fw-bold fs-18">
+                                Username:
                               </label>
                               <input
                                 type="text"
                                 id="username"
-                                className="form-control"
+                                className="form-control fs-16"
+                                placeholder="Enter Username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                               />
                             </div>
-                            <div class="col-md-12 mb-4">
-                              <div className="form-group mb-3">
-                                <label
-                                  htmlFor="password"
-                                  className="form-label"
-                                >
-                                  <h1> Password:</h1>
-                                </label>
-                                <input
-                                  type="password"
-                                  id="password"
-                                  className="form-control"
-                                  value={password}
-                                  onChange={(e) => setPassword(e.target.value)}
-                                  required
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                style={{ margin: "10px", marginTop: "50px" }}
-                                className="h4"
+                            <div className="form-group mb-4 text-start">
+                              <label
+                                htmlFor="password"
+                                className="form-label fw-bold fs-18"
                               >
-                                Create Account ? <Link to="/register">register</Link>
+                                Password:
+                              </label>
+                              <input
+                                type="password"
+                                id="password"
+                                className="form-control fs-16"
+                                placeholder="Enter Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div className="text-center text-md-start">
+                              <div
+                                style={{ margin: "10px 0", marginTop: "20px" }}
+                                className="fs-14"
+                              >
+                                Don't have an account? <Link to="/register" className="text-primary fw-bold">Register</Link>
                               </div>
-                              <div style={{ margin: "10px" }} className="h4">
-                                Forgot password ?{" "}
-                                <Link to="/forgot-password">click here</Link>
+                              <div style={{ margin: "10px 0" }} className="fs-14">
+                                Forgot password?{" "}
+                                <Link to="/forgot-password" title="Reset Password" className="text-primary">Click here</Link>
                               </div>
-                              <div>
+                              <div className="mt-4">
                                 <button
-                                  style={{ height: "40px", width: "120px" }}
+                                  style={{ height: "45px", width: "100%", maxWidth: "150px" }}
                                   type="submit"
+                                  className="btn-login-custom"
                                 >
                                   <a
-                                    style={{ marginTop: "50px" }}
-                                    class="fancy"
+                                    className="fancy"
                                   >
                                     <span class="top-key"></span>
                                     <span class="text">Login</span>
@@ -145,11 +145,6 @@ const LoginPage = () => {
                                   </a>
                                 </button>
                               </div>
-                              {/* <div>
-          <button type="submit" className="btn btn-primary mt-2 px-5 h4">
-            Login
-          </button>
-        </div> */}
                             </div>
                           </div>
                         </div>
