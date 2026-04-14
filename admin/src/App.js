@@ -22,7 +22,7 @@ import Category from "./pages/admin/AddCategory";
 import EditCourse from "./pages/admin/EditCourse";
 import AdminProtected from "./pages/admin/AdminProtected";
 import RegisterPage from "./pages/RegisterPage";
-import { Reg } from "./pages/Reg";
+
 import UserList from "./pages/admin/UserList";
 import Course from "./components/Course";
 import { Teacher } from "./pages/Teacher";
