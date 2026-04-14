@@ -20,11 +20,17 @@ app.use(
   })
 );
 app.use(express.json());
+app.set('trust proxy', 1); // Trust the first proxy (Render)
 app.use(
   session({
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: true, // Required for sameSite: 'none'
+      sameSite: "none", // Required for cross-domain cookies
+      maxAge: 24 * 60 * 60 * 1000,
+    },
   })
 );
 app.use(passport.initialize());
