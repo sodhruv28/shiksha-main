@@ -39,7 +39,7 @@ import Techsuc from "./pages/Techsuc";
 import Payment from "./pages/payment";
 import PaymentHistory from "./pages/admin/PaymentHistory";
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || "";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || "https://shiksha-main.onrender.com";
 axios.defaults.withCredentials = true;
 
 function App() {
