@@ -15,7 +15,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: [process.env.ADMIN_URL], // Replace with the URL of your client application
+    origin: [process.env.ADMIN_URL, "https://shikshaaa.netlify.app"], // Whitelist your production URL
     credentials: true, // Enable credentials (cookies) support
   })
 );
