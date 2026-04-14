@@ -14,18 +14,22 @@ export function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [cartItems, setCartItems] = useState([]);
+  const [authLoading, setAuthLoading] = useState(true);
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
+        setAuthLoading(true);
         const result = await axios.get(
           "/api/user/authenticate",
           { withCredentials: true }
         );
         setAuthenticated(result.data.authenticated);
         setUserInfo(result.data.user);
+        setAuthLoading(false);
       } catch (error) {
         setAuthenticated(false);
         setUserInfo(null);
+        setAuthLoading(false);
       }
     };
 
@@ -55,6 +59,7 @@ export function AuthProvider({ children }) {
         setUserInfo,
         cartItems,
         setCartItems,
+        authLoading,
       }}
     >
       {children}
