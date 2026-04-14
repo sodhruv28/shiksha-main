@@ -18,14 +18,14 @@ const Navbar = ({ psa, psui, psci }) => {
           "/api/cart/fetch-cartItems",
           { withCredentials: true }
         );
-        setCartItems(response.data.cartItems);
+        setCartItems(response.data.cartItems || []);
       } catch (error) {
         // console.error("Error fetching cartItems:", error);
       }
     };
     fetchCartItems();
   }, [setCartItems]);
-  const total_items = cartItems.length;
+  const total_items = cartItems?.length || 0;
   return (
     <NavbarWrapper className="bg-white flex">
       <div className="container w-100">

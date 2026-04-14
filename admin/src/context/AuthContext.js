@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
           "/api/cart/fetch-cartItems",
           { withCredentials: true }
         );
-        setCartItems(response.data.cartItems);
+        setCartItems(response.data.cartItems || []);
       } catch (error) {
         // console.error("Error fetching cartItems:", error);
       }
