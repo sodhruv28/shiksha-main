@@ -50,16 +50,16 @@ const Tabs = () => {
     fetchAllCourses();
   }, []);
 
-  const categoriesWithCourses = (categories || []).filter((category) =>
-    (courses || []).some(
+  const categoriesWithCourses = Array.isArray(categories) ? categories.filter((category) =>
+    Array.isArray(courses) && courses.some(
       (course) => course.category && course.category._id === category._id
     )
-  );
+  ) : [];
 
-  const currentCourses = (courses || []).filter(
+  const currentCourses = Array.isArray(courses) ? courses.filter(
     (course) =>
       activeTab === "all" || course?.category?.category_name === activeTab
-  );
+  ) : [];
 
   if (loading) {
     return <Loader1 />;
