@@ -10,8 +10,7 @@ import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import api from "./api";
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || "";
-axios.defaults.withCredentials = true;
+
 
 import { useEffect } from "react";
 import { useAuth } from "./context/AuthContext";
@@ -40,6 +39,8 @@ import Techsuc from "./pages/Techsuc";
 import Payment from "./pages/payment";
 import PaymentHistory from "./pages/admin/PaymentHistory";
 
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || "";
+axios.defaults.withCredentials = true;
 
 function App() {
   const { setAuthenticated, setUserInfo, setCartItems, setAdminInfo } =

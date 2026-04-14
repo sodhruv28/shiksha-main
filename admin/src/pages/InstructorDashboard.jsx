@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 // import CardImg from 'react-bootstrap/esm/CardImg';
 import Button from "react-bootstrap/Button";
 
-function TextExample() {
+function InstructorDashboard() {
   return (
     <div>
       <div>
@@ -231,4 +231,4 @@ function TextExample() {
   );
 }
 
-export default TextExample;
+export default InstructorDashboard;
