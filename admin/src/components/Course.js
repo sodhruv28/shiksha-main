@@ -22,26 +22,7 @@ const Course = ({ course }) => {
   const [isCoursePurchased, setPurchased] = useState(false);
   const navigate = useNavigate();
 
-  const fetchPlaylistDetails = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        "/api/user/authenticate",
-        { withCredentials: true }
-      );
-      const { authenticated, user } = response.data;
-      setUserInfo(user);
-      setAuthenticated(authenticated);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  };
 
-  useEffect(() => {
-    // Fetch playlist details when the component mounts
-    fetchPlaylistDetails();
-  }, []);
 
   const addToCart = async (courseId) => {
     try {
@@ -81,8 +62,10 @@ const Course = ({ course }) => {
   useEffect(() => {
     if (userInfo?.playlist?.includes(_id)) {
       setPurchased(true);
+    } else {
+      setPurchased(false);
     }
-  }, [setAuthenticated, setUserInfo]);
+  }, [userInfo, _id]);
   if (loading) {
     return <CourseLoader></CourseLoader>;
   }
