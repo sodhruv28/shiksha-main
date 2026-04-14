@@ -30,7 +30,7 @@ const EditCourse = () => {
   const fetchLangNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/user/language"
+        "/api/user/language"
       );
       const language = response.data.language;
       setLanguageNames(language);
@@ -42,7 +42,7 @@ const EditCourse = () => {
   const fetchCategoryNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/course/categories"
+        "/api/course/categories"
       );
       const categories = response.data.categories;
       setCategoryNames(categories);
@@ -60,7 +60,7 @@ const EditCourse = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:8080/api/course/fetch-courseDetails/${_id}`)
+      .get(`/api/course/fetch-courseDetails/${_id}`)
       .then((response) => {
         const fetchedCourseData = response.data;
         setOriginalCourseData(fetchedCourseData);
@@ -175,7 +175,7 @@ const EditCourse = () => {
   
     try {
       setLoading(true);
-      await axios.put(`http://localhost:8080/api/course/update-course/${_id}`, formData, config);
+      await axios.put(`/api/course/update-course/${_id}`, formData, config);
       toast.success("Course updated successfully");
       navigate("/allcourses");
     } catch (error) {

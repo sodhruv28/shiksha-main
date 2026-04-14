@@ -19,7 +19,7 @@ const AddCategory = () => {
     if (category) {
       try {
         const response = await axios.put(
-          `http://localhost:8080/api/course/update-category/${category._id}`,
+          `/api/course/update-category/${category._id}`,
           { category_name: categoryName }
         );
         setCategory(null);
@@ -40,7 +40,7 @@ const AddCategory = () => {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/course/create-category",
+          "/api/course/create-category",
           { category_name: categoryName }
         );
         setCategoryName("");
@@ -70,7 +70,7 @@ const AddCategory = () => {
       const categoryId = category._id;
       setBtnLoading(true);
       await axios.delete(
-        `http://localhost:8080/api/course/delete-category/${categoryId}`,
+        `/api/course/delete-category/${categoryId}`,
         {
           withCredentials: true,
         }
@@ -89,7 +89,7 @@ const AddCategory = () => {
   const fetchCategoryNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/course/categories"
+        "/api/course/categories"
       );
       const categories = response.data.categories;
       setCategoryNames(categories);

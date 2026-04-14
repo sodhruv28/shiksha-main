@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import Loader1 from "../components/loaders/Loader1";
 import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
+import api from "../api";
 
 const CartPage = () => {
   const { cartItems, setCartItems } = useAuth();
@@ -18,9 +19,8 @@ const CartPage = () => {
     const fetchCartItems = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "http://localhost:8080/api/cart/fetch-cartItems",
-          { withCredentials: true }
+        const response = await api.get(
+          "/api/cart/fetch-cartItems"
         );
         setCartItems(response.data.cartItems);
         setLoading(false);
@@ -34,12 +34,11 @@ const CartPage = () => {
 
   const handleCheckout = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/cart/checkout",
+      const response = await api.post(
+        "/api/cart/checkout",
         {
           cartItems: cartItems,
-        },
-        { withCredentials: true }
+        }
       );
 
       if (response.data.url) {
@@ -63,10 +62,9 @@ const CartPage = () => {
         setBtnLoading(true);
 
         // Make a POST request to edit the playlist
-        const editPlaylistResponse = await axios.post(
-          "http://localhost:8080/api/playlist/edit",
-          null,
-          { withCredentials: true }
+        const editPlaylistResponse = await api.post(
+          "/api/playlist/edit",
+          null
         );
 
         // Check if editing the playlist was successful
@@ -74,9 +72,8 @@ const CartPage = () => {
         }
 
         // Fetch cart items
-        const fetchCartItemsResponse = await axios.get(
-          "http://localhost:8080/api/cart/fetch-cartItems",
-          { withCredentials: true }
+        const fetchCartItemsResponse = await api.get(
+          "/api/cart/fetch-cartItems"
         );
 
         // Update cart items state
@@ -101,12 +98,9 @@ const CartPage = () => {
   const clearCart = async () => {
     try {
       setLoading(true);
-      await axios.delete(`http://localhost:8080/api/cart/remove-allCartItems`, {
-        withCredentials: true,
-      });
-      const response = await axios.get(
-        "http://localhost:8080/api/cart/fetch-cartItems",
-        { withCredentials: true }
+      await api.delete(`/api/cart/remove-allCartItems`);
+      const response = await api.get(
+        "/api/cart/fetch-cartItems"
       );
       setCartItems(response.data.cartItems);
       setLoading(false);

@@ -44,7 +44,7 @@ const Teachform = () => {
   const fetchLangNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/user/language"
+        "/api/user/language"
       );
       const language = response.data.language;
       setLanguageNames(language);
@@ -55,7 +55,7 @@ const Teachform = () => {
 
   const fetchskillsNames = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/user/skills");
+      const response = await axios.get("/api/user/skills");
       const skills = response.data.skills;
       setSkillsNames(skills);
     } catch (error) {
@@ -133,7 +133,7 @@ const Teachform = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:8080/api/user/teacher",
+        "/api/user/teacher",
         data
       );
 

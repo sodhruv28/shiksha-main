@@ -14,7 +14,7 @@ const CourseForm = () => {
     try {
       if (!currentUser) return; // Ensure there's a logged-in user
       const userId = currentUser.id; // Or whatever property has the ID
-      const response = await axios.get(`http://localhost:8080/api/course/fetch-allcourses/${userId}`);
+      const response = await axios.get(`/api/course/fetch-allcourses/${userId}`);
       setCourses(response.data);
       setLoading(false);
     } catch (error) {

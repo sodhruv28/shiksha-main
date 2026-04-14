@@ -16,7 +16,7 @@ const UserList = () => {
   useEffect(() => {
     // Fetch user data
     axios
-      .get("http://localhost:8080/api/user/fetch-allusers", {
+      .get("/api/user/fetch-allusers", {
         withCredentials: true,
       })
       .then((response) => {
@@ -30,7 +30,7 @@ const UserList = () => {
 
     // Fetch current user's information
     axios
-      .get("http://localhost:8080/api/user/current-user", {
+      .get("/api/user/current-user", {
         withCredentials: true,
       })
       .then((response) => {
@@ -87,13 +87,13 @@ const UserList = () => {
     setLoading(true);
     // Send a request to delete the user
     axios
-      .delete(`http://localhost:8080/api/user/delete/${userId}`, {
+      .delete(`/api/user/delete/${userId}`, {
         withCredentials: true,
       })
       .then((response) => {
         // Refetch users after deletion
         axios
-          .get("http://localhost:8080/api/user/fetch-allusers", {
+          .get("/api/user/fetch-allusers", {
             withCredentials: true,
           })
           .then((response) => {
@@ -124,7 +124,7 @@ const UserList = () => {
     // Send a request to update the user's role
     axios
       .put(
-        `http://localhost:8080/api/user/role/${userId}`,
+        `/api/user/role/${userId}`,
         { role: newRole },
         {
           withCredentials: true,
@@ -133,7 +133,7 @@ const UserList = () => {
       .then((response) => {
         // Refetch users after role change
         axios
-          .get("http://localhost:8080/api/user/fetch-allusers", {
+          .get("/api/user/fetch-allusers", {
             withCredentials: true,
           })
           .then((response) => {
@@ -165,7 +165,7 @@ const UserList = () => {
     // Send a request to update the user's role
     axios
       .put(
-        `http://localhost:8080/api/user/role/${userId}`,
+        `/api/user/role/${userId}`,
         { role: newRole },
         {
           withCredentials: true,
@@ -174,7 +174,7 @@ const UserList = () => {
       .then((response) => {
         // Refetch users after role change
         axios
-          .get("http://localhost:8080/api/user/fetch-allusers", {
+          .get("/api/user/fetch-allusers", {
             withCredentials: true,
           })
           .then((response) => {

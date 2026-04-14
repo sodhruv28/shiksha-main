@@ -31,7 +31,7 @@ const AddCourse = () => {
   const fetchLangNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/user/language"
+        "/api/user/language"
       );
       const language = response.data.language;
       setLanguageNames(language);
@@ -43,7 +43,7 @@ const AddCourse = () => {
   const fetchCategoryNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/course/categories"
+        "/api/course/categories"
       );
       const categories = response.data.categories;
       setCategoryNames(categories);
@@ -136,7 +136,7 @@ const handleInputChange = (e) => {
     });
   
     try {
-      await axios.post("http://localhost:8080/api/course/create-course", formData, {
+      await axios.post("/api/course/create-course", formData, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",

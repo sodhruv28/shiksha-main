@@ -10,11 +10,11 @@ const CartItem = ({ cartItem, loading, setLoading, setCartItems }) => {
     try {
       setLoading(true);
       await axios.delete(
-        `http://localhost:8080/api/cart/remove-cartItem/${cartItem}`,
+        `/api/cart/remove-cartItem/${cartItem}`,
         { withCredentials: true }
       );
       const response = await axios.get(
-        "http://localhost:8080/api/cart/fetch-cartItems",
+        "/api/cart/fetch-cartItems",
         { withCredentials: true }
       );
       setCartItems(response.data.cartItems);

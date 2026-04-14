@@ -26,7 +26,7 @@ const Course = ({ course }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "http://localhost:8080/api/user/authenticate",
+        "/api/user/authenticate",
         { withCredentials: true }
       );
       const { authenticated, user } = response.data;
@@ -47,7 +47,7 @@ const Course = ({ course }) => {
     try {
       setBtnLoading(true);
       const res = await axios.post(
-        `http://localhost:8080/api/cart/add-to-cart/${courseId}`,
+        `/api/cart/add-to-cart/${courseId}`,
         null,
         { withCredentials: true }
       );
@@ -60,7 +60,7 @@ const Course = ({ course }) => {
         return toast.warn("Course already in cart");
       }
       const response = await axios.get(
-        "http://localhost:8080/api/cart/fetch-cartItems",
+        "/api/cart/fetch-cartItems",
         { withCredentials: true }
       );
       setCartItems(response.data.cartItems);

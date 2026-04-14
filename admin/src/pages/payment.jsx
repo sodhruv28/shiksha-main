@@ -14,7 +14,7 @@ function PlaylistForm() {
       try {
         const { _id } = userInfo;
         const response = await axios.get(
-          `http://localhost:8080/api/user/payment/${_id}`
+          `/api/user/payment/${_id}`
         );
         setPlaylists(response.data);
       } catch (error) {

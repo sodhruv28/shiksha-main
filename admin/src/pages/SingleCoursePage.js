@@ -24,7 +24,7 @@ const SingleCoursePage = () => {
   const fetchCourseDetails = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/course/fetch-courseDetails/${_id}`,
+        `/api/course/fetch-courseDetails/${_id}`,
         { withCredentials: true }
       );
       setCourse(res.data);
@@ -49,7 +49,7 @@ const SingleCoursePage = () => {
     try {
       setBtnLoading(true);
       const res = await axios.post(
-        `http://localhost:8080/api/cart/add-to-cart/${courseId}`,
+        `/api/cart/add-to-cart/${courseId}`,
         null,
         { withCredentials: true }
       );
@@ -62,7 +62,7 @@ const SingleCoursePage = () => {
         return toast.warn("Course already in cart");
       }
       const response = await axios.get(
-        "http://localhost:8080/api/cart/fetch-cartItems",
+        "/api/cart/fetch-cartItems",
         { withCredentials: true }
       );
       setCartItems(response.data.cartItems);

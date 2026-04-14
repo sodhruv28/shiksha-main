@@ -9,6 +9,10 @@ import User from "./pages/User";
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
+import api from "./api";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || "";
+axios.defaults.withCredentials = true;
+
 import { useEffect } from "react";
 import { useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
@@ -44,9 +48,8 @@ function App() {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/cart/fetch-cartItems",
-          { withCredentials: true }
+        const response = await api.get(
+          "/api/cart/fetch-cartItems"
         );
         setCartItems(response.data.cartItems);
       } catch (error) {

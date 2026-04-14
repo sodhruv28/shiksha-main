@@ -15,7 +15,7 @@ const Navbar = ({ psa, psui, psci }) => {
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/cart/fetch-cartItems",
+          "/api/cart/fetch-cartItems",
           { withCredentials: true }
         );
         setCartItems(response.data.cartItems);

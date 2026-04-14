@@ -16,7 +16,7 @@ const AllCourses = () => {
   const fetchAllCourses = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/api/course/fetch-allcourses",
+        "/api/course/fetch-allcourses",
         { withCredentials: true }
       );
       setCourses(res.data);
@@ -31,7 +31,7 @@ const AllCourses = () => {
     try {
       const { _id } = userInfo;
       const res = await axios.get(
-        `http://localhost:8080/api/course/courses/user/${_id}`,
+        `/api/course/courses/user/${_id}`,
         { withCredentials: true }
       );
       setCourses(res.data.courses);

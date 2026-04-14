@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import api from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import Loader1 from "../components/loaders/Loader1";
 import { toast } from "react-toastify";
@@ -17,8 +18,8 @@ const LoginPage = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        "http://localhost:8080/api/user/login", // Assuming your backend is on the same domain, so using relative URL
+      const response = await api.post(
+        "/api/user/login", // Assuming your backend is on the same domain, so using relative URL
         {
           username,
           password,
@@ -27,7 +28,6 @@ const LoginPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true, // Include credentials (cookies) in the request
         }
       );
 

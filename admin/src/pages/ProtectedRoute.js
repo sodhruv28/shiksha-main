@@ -13,7 +13,7 @@ function ProtectedRoute({ children }) {
     const checkAuthentication = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/user/authenticate",
+          "/api/user/authenticate",
           { withCredentials: true }
         );
         const { authenticated, user } = response.data;

@@ -22,7 +22,7 @@ const Tabs = () => {
   const fetchAllCourses = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/api/course/fetch-allcourses",
+        "/api/course/fetch-allcourses",
         { withCredentials: true }
       );
       setCourses(res.data);
@@ -36,7 +36,7 @@ const Tabs = () => {
   const fetchCategoryNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/course/categories"
+        "/api/course/categories"
       );
       const categories = response.data.categories;
       setCategories(categories);

@@ -27,7 +27,7 @@ const UserProfileUpdate = ({ userInfo, setUserInfo }) => {
 
     try {
       const response = await axios.put(
-        "http://localhost:8080/api/user/update",
+        "/api/user/update",
         updatedUserInfo,
         {
           withCredentials: true,

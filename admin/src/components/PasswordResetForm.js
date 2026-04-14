@@ -17,7 +17,7 @@ const PasswordResetForm = () => {
     setIsLoading(true); // Start loading
   
     try {
-      await axios.put("http://localhost:8080/api/user/forgot", { email });
+      await axios.put("/api/user/forgot", { email });
       setSuccessMessage("Password reset email sent. Check your inbox.");
       setError("");
     } catch (error) {

@@ -24,7 +24,7 @@ const RegisterPage = () => {
     }
     if (username.length > 3) {
       const res = await axios.get(
-        `http://localhost:8080/api/user/validateUsername/${username}`,
+        `/api/user/validateUsername/${username}`,
         { withCredentials: true }
       );
       if (res.data.message === "Username Already Used") {
@@ -33,7 +33,7 @@ const RegisterPage = () => {
     }
     if (email.length > 0) {
       const res = await axios.get(
-        `http://localhost:8080/api/user/validateEmail/${email}`,
+        `/api/user/validateEmail/${email}`,
         { withCredentials: true }
       );
       if (res.data.message === "Email already used") {
@@ -50,7 +50,7 @@ const RegisterPage = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:8080/api/user/register",
+        "/api/user/register",
         {
           username,
           email,

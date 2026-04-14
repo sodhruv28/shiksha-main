@@ -32,7 +32,7 @@ export default function User() {
     if (userInfo.role === "admin" || userInfo.role === "sub-admin") {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/user/teacherdata"
+          "/api/user/teacherdata"
         );
         setteachers(response.data.teachers); // Corrected from setteacher to setteachers
       } catch (error) {
@@ -46,7 +46,7 @@ export default function User() {
     if (userInfo.role === "admin" || userInfo.role === "sub-admin") {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/user/teachers"
+          "/api/user/teachers"
         );
         setInstructors(response.data.instructors);
         setInstructor(response.data.instructor);
@@ -62,7 +62,7 @@ export default function User() {
       setLoading(true);
       setPlaylistLoading(true);
       const response = await axios.get(
-        "http://localhost:8080/api/user/authenticate",
+        "/api/user/authenticate",
         { withCredentials: true }
       );
       const { authenticated, user } = response.data;
@@ -72,7 +72,7 @@ export default function User() {
       const courseDetailsArray = await Promise.all(
         data.map(async (courseId) => {
           const res = await axios.get(
-            `http://localhost:8080/api/course/fetch-courseDetails/${courseId}`
+            `/api/course/fetch-courseDetails/${courseId}`
           );
           return { ...res.data, isCertified: false };
         })
@@ -93,7 +93,7 @@ export default function User() {
     try {
       const { _id } = userInfo;
       const response = await axios.get(
-        `http://localhost:8080/api/course/courses/user/${_id}`
+        `/api/course/courses/user/${_id}`
       );
       setCourses(response.data.courses);
     } catch (error) {
@@ -113,7 +113,7 @@ export default function User() {
   const handleLogout = async () => {
     try {
       setLoading(true);
-      await axios.get("http://localhost:8080/api/user/logout", {
+      await axios.get("/api/user/logout", {
         withCredentials: true,
       });
       setAuthenticated(false);

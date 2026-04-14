@@ -9,7 +9,7 @@ export const useAuthentication = () => {
     const checkAuthentication = async () => {
       try {
         const result = await axios.get(
-          "http://localhost:8080/api/user/authenticate",
+          "/api/user/authenticate",
           { withCredentials: true }
         );
         setUserAuth(result.data.authenticated);

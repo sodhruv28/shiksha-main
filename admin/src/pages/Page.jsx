@@ -24,7 +24,7 @@ const LoginPage = ({isAdmin}) => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:8080/api/user/login",
+        "/api/user/login",
         {
           username,
           password,

@@ -18,13 +18,13 @@ const AdminCourse = ({ course, setCourses }) => {
     try {
       setBtnLoading(true);
       await axios.put(
-        `http://localhost:8080/api/course/disable-course/${courseId}`,
+        `/api/course/disable-course/${courseId}`,
         { withCredentials: true }
       );
   
       // Update the courses list after disabling the course
       const res = await axios.get(
-        "http://localhost:8080/api/course/fetch-allcourses",
+        "/api/course/fetch-allcourses",
         { withCredentials: true }
       );
       setCourses(res.data);

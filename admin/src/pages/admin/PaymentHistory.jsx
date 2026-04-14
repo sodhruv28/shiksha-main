@@ -9,7 +9,7 @@ const PaymentHistoryForm = () => {
   useEffect(() => {
     const fetchPaymentHistory = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/cart/history'); // Adjust the endpoint based on your backend setup
+        const response = await axios.get('/api/cart/history'); // Adjust the endpoint based on your backend setup
         setPaymentHistory(response.data.paymentHistory.data);
       } catch (error) {
         setError('An error occurred while fetching payment history.');
